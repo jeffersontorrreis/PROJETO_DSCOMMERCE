@@ -15,7 +15,7 @@ public class ProductController{
     @Autowired
     private ProductService service;
 
-
+    /*Não adicionamos nenhuma notação porque queremos que essa rota seja publica.*/
     @GetMapping
     public List<ProductDTO> findAll(){
         return service.findAll();
