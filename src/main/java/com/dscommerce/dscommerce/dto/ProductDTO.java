@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
+
+/*Esse DTO é para quando nós clicarmos no produto, onde aparece o produto individualmente com a descrção*/
 public class ProductDTO {
     private Long id;
 
@@ -12,7 +14,7 @@ public class ProductDTO {
     @NotBlank(message = "Campo requerido")
     private String name;
 
-    @Size(min = 3, max = 150, message = "Nome precisa ter de 3 a 80 caracteres")
+    @Size(min = 3, max = 250, message = "Nome precisa ter de 3 a 80 caracteres")
     @NotBlank(message = "Campo requerido")
     private String description;
 

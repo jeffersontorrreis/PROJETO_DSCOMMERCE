@@ -39,6 +39,7 @@ public class ResourceServerConfig {
         return http.build();
     }
 
+
     @Bean
     @Order(3)
     SecurityFilterChain rsSecurityFilterChain(HttpSecurity http) throws Exception {
@@ -84,3 +85,4 @@ public class ResourceServerConfig {
         return bean;
     }
 }
+

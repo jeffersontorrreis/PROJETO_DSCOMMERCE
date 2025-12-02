@@ -1,5 +1,6 @@
 package com.dscommerce.dscommerce.services;
 import com.dscommerce.dscommerce.dto.ProductDTO;
+import com.dscommerce.dscommerce.dto.ProductMinDTO;
 import com.dscommerce.dscommerce.entities.Product;
 import com.dscommerce.dscommerce.repositories.ProductRepository;
 import com.dscommerce.dscommerce.services.exceptions.DatabaseException;
@@ -20,14 +21,15 @@ public class ProductService {
     @Autowired
     private ProductRepository repository;
 
-
+    /*Aqui a busca é geral, paginada, e sem autenticação. Não precisa de descrição.*/
     @Transactional(readOnly = true)
-    public List<ProductDTO> findAll() {
+    public List<ProductMinDTO> findAll() {
         List<Product> result = repository.findAll();
-        return result.stream().map(x -> new ProductDTO(x)).collect(Collectors.toList());
+        return result.stream().map(x -> new ProductMinDTO(x)).collect(Collectors.toList());
     }
 
 
+    /*Aqui é como se clicassemos em um produto, onde podemos visualizar de forma individual. Esse precisa de descrição do produto*/
     @Transactional(readOnly = true)
     public ProductDTO findById(Long id) {
         try {

@@ -1,5 +1,6 @@
 package com.dscommerce.dscommerce.controllers;
 import com.dscommerce.dscommerce.dto.ProductDTO;
+import com.dscommerce.dscommerce.dto.ProductMinDTO;
 import com.dscommerce.dscommerce.services.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class ProductController{
 
     /*Não adicionamos nenhuma notação porque queremos que essa rota seja publica.*/
     @GetMapping
-    public List<ProductDTO> findAll(){
+    public List<ProductMinDTO> findAll(){
         return service.findAll();
     }
 
