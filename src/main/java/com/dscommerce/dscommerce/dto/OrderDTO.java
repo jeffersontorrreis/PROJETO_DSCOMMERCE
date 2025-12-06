@@ -17,6 +17,7 @@ public class OrderDTO {
 
     private ClientDTO client;
     private PaymentDTO payment;
+    private String imgUrl;
 
 
     @NotEmpty(message = "Deve ter pelo menos um produto")
@@ -27,7 +28,7 @@ public class OrderDTO {
 
     }
 
-    public OrderDTO(Long id, Instant moment, OrderStatus status, ClientDTO client, PaymentDTO payment) {
+    public OrderDTO(Long id, Instant moment, OrderStatus status, ClientDTO client, PaymentDTO payment, String imgUrl) {
         this.id = id;
         this.moment = moment;
         this.status = status;
@@ -41,6 +42,7 @@ public class OrderDTO {
         status = entity.getStatus();
         client = new ClientDTO(entity.getClient());
         payment = (entity.getPayment() == null) ? null : new PaymentDTO((entity.getPayment()));
+
         /*Se o payment for igual a null então é nulo. Se não recebe um pagamento.*/
 
         for (OrderItem item : entity.getItems()){
