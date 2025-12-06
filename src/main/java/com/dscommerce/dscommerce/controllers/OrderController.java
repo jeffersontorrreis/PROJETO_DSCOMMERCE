@@ -15,6 +15,7 @@ public class OrderController {
     @Autowired
     private OrderService service;
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_OPERATOR')")
     @GetMapping(value = "/{id}")
     public OrderDTO findById(@PathVariable Long id){
         return service.findById(id);

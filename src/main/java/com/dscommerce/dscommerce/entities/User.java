@@ -118,18 +118,18 @@ public class User implements UserDetails {
     }
 
 
-    public void addRole(Role role) {
-        roles.add(role); /*Recebe um role(perfil) como parametro e adiciona no conjunto de roles(perfis)*/
-    }
-
-    /*Criamos esse metodo para verificar o perfil que chega aqui. Valida se é aquele perfil especifico. Se não for o perfil especifico nega.*/
-    public boolean hasRole(String roleName) {
-        for (Role role : roles) {
-            if (role.getAuthority().equals(roleName)) { /*Se o meu getAuthority(perfil) for igual ao rolename(perfil que chegou acima) retorna tru. */
+    public boolean hasRole(String roleName){
+        for (Role role : roles){
+            if(role.getAuthority().equals(roleName)){ /*Se algum dos roles do meu usuario for igual a esse que chegou "roleName" retorna true*/
                 return true;
             }
         }
         return false;
+    }
+
+
+    public void addRole(Role role) {
+        roles.add(role); /*Recebe um role(perfil) como parametro e adiciona no conjunto de roles(perfis)*/
     }
 
     /*equals e hascode normal que criamos para comparação de ids*/

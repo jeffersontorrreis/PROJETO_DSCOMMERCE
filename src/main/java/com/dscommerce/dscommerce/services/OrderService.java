@@ -30,10 +30,14 @@ public class OrderService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private AuthService authService;
+
     @Transactional(readOnly = true)
     public OrderDTO findById(Long id) {
         try {
             Order order = repository.findById(id).get();
+            authService.validatelfOrAdmin((order.getClient().getId())); /*Estamos testando se o usuario logado é dono desse pedido ou admin, se for um dos dois retorna normal abaixo, se não deve vir a exception "ForbiddenException"*/
             return new OrderDTO(order);
         }
         catch (NoSuchElementException e) {
