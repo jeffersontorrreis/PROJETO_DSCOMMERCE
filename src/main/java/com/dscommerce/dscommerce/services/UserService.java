@@ -44,8 +44,7 @@ public class UserService implements UserDetailsService {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             Jwt jwtPrincipal = (Jwt) authentication.getPrincipal();
             String username = jwtPrincipal.getClaim("username");
-            /*Praticamente o email que esta no token do usuario estamos passando esse email para o "username"*/
-
+            
             return repository.findByEmail(username).get();
         }
         catch (Exception e){
