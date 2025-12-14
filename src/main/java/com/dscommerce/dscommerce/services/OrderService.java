@@ -37,7 +37,7 @@ public class OrderService {
     public OrderDTO findById(Long id) {
         try {
             Order order = repository.findById(id).get();
-            authService.validatelfOrAdmin((order.getClient().getId())); /*Estamos testando se o usuario logado é dono desse pedido ou admin, se for um dos dois retorna normal abaixo, se não deve vir a exception "ForbiddenException"*/
+            authService.validatelfOrAdmin((order.getClient().getId())); 
             return new OrderDTO(order);
         }
         catch (NoSuchElementException e) {
@@ -52,13 +52,13 @@ public class OrderService {
         order.setMoment(Instant.now());
         order.setStatus(OrderStatus.WAITING_PAYMENT);
 
-        User user = userService.authenticated(); /*Estamos buscando o usuario logado. Operação para saber qual user esta autenticado que fizemos no userservice.*/
+        User user = userService.authenticated(); 
         order.setClient(user);
 
-        for (OrderItemDTO itemDto : dto.getItems()){ /*Vamos percorrer todos os itens do "OrderItemDTO" , acessando pelo getItems do "OrderDTO"*/
-            Product product = productRepository.getReferenceById(itemDto.getProductId()); /*Buscar produtos e instanciar para "product product"*/
-            OrderItem item = new OrderItem(order, product, itemDto.getQuantity(), product.getPrice()); /*Estamos trazendo os dados que precisamos e instanciando "OrderItem item"*/
-            order.getItems().add(item); /*Adiciona um item(add(item) para a coleção de items(order.getItems().*/
+        for (OrderItemDTO itemDto : dto.getItems()){ 
+            Product product = productRepository.getReferenceById(itemDto.getProductId()); 
+            OrderItem item = new OrderItem(order, product, itemDto.getQuantity(), product.getPrice()); 
+            order.getItems().add(item); 
         }
         repository.save(order);
         orderItemRepository.saveAll(order.getItems());
