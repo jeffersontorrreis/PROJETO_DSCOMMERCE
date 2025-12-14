@@ -23,7 +23,7 @@ public class ProductService {
     @Autowired
     private ProductRepository repository;
 
-    /*Aqui a busca é geral, paginada, e sem autenticação. Não precisa de descrição.*/
+    
     @Transactional(readOnly = true)
     public List<ProductMinDTO> findAll() {
         List<Product> result = repository.findAll();
@@ -31,7 +31,7 @@ public class ProductService {
     }
 
 
-    /*Aqui é como se clicassemos em um produto, onde podemos visualizar de forma individual. Esse precisa de descrição do produto*/
+   
     @Transactional(readOnly = true)
     public ProductDTO findById(Long id) {
         try {
@@ -52,18 +52,18 @@ public class ProductService {
         entity.setImgUrl(dto.getImgUrl ());
         entity.setPrice(dto.getPrice ());
 
-        entity.getCategories().clear(); /*Apaga as categorias antigas para abaixo adicionarmos novas*/
+        entity.getCategories().clear(); 
         for (CategoryDTO catDto : dto.getCategories()){
             Category cat = new Category();
-            cat.setId(catDto.getId()); /*Veja que antes de setar, buscamos primeiro com o get o id para saber se existe. O id da categoria ja tras o nome da categoria ?*/
-            entity.getCategories().add(cat); /*Veja que estamos adicionando tanto o valores do "entity" estamos adicionando também as categorias ".add(cat)*/
-        } /*na realidade no front vamos precisar selecionar apenas o nome.*/
+            cat.setId(catDto.getId()); 
+            entity.getCategories().add(cat);
+        } 
 
         entity = repository.save(entity);
         return new ProductDTO(entity);
     }
 
-    /*Recuperando id passado como parâmetro e atualizando dados desse id (metodo PUT)*/
+
     @Transactional
     public ProductDTO update(Long id, ProductDTO dto) {
         try {
@@ -74,12 +74,12 @@ public class ProductService {
             entity.setImgUrl(dto.getImgUrl ());
 
 
-            entity.getCategories().clear(); /*Apaga as categorias antigas*/
+            entity.getCategories().clear(); 
             for (CategoryDTO catDto : dto.getCategories()){
                 Category cat = new Category();
-                cat.setId(catDto.getId()); /*Veja que antes de setar, buscamos primeiro com o get o id para saber se existe. O id da categoria ja tras o nome da categoria ?*/
-                entity.getCategories().add(cat); /*Veja que estamos adicionando tanto o valores do "entity" estamos adicionando também as categorias ".add(cat)*/
-            } /*na realidade no front vamos precisar selecionar apenas o nome.*/
+                cat.setId(catDto.getId()); 
+                entity.getCategories().add(cat); 
+            } 
 
             entity = repository.save(entity);
             return new ProductDTO(entity);
@@ -88,7 +88,7 @@ public class ProductService {
         }
     }
 
-    /*Recuperando product por id e deletando o mesmo product (metodo delete)*/
+    
     @Transactional(propagation = Propagation.SUPPORTS)
     public void delete(Long id) {
         if(!repository.existsById(id)){
