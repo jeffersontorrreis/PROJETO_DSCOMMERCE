@@ -18,7 +18,7 @@ public class CategoryController {
     @Autowired
     private CategoryService service;
 
-    /*Não adicionamos nenhuma notação porque queremos que essa rota seja publica.*/
+   
     @GetMapping
     public List<CategoryDTO> findAll(){
         List<CategoryDTO> list = service.findAll();
